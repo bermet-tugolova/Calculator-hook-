@@ -4,17 +4,14 @@ export class Calculator extends React.Component {
     constructor() {
         super()
         this.state = {
-            num1: '',
+            num1: '2',
             znakValue: '+',
-            num2: '',
+            num2: '2',
             result: 0
         }
     }
-    onNum1 = (e) => {
-        this.setState(() => ({num1: parseInt(e.target.value)}))
-    }
-    onNum2 = (e) => {
-        this.setState(() => ({num2: parseInt(e.target.value)}))
+    inputHandler = (e) => {
+        this.setState(() => ({[e.target.name]: e.target.value}))//это чтобы каждый раз значение в инпуте обновлялось  
     }
     onZnak= (e) => {
         this.setState(() => ({znakValue: e.target.value}))
@@ -43,9 +40,19 @@ export class Calculator extends React.Component {
     render() {
         return <div>
             <h1>Calculator</h1>
-            <input type="text" defaultValue={this.state.num1} onChange={this.onNum1}/>
-            <input type="text" className="znak" defaultValue={this.state.znakValue} onChange={this.onZnak}/>
-            <input type="text" defaultValue={this.state.num2} onChange={this.onNum2}/>
+            <input 
+                type="text" 
+                value={this.state.num1} 
+                onChange={this.inputHandler}
+                name="num1"
+                />
+            <input type="text" className="znak" value={this.state.znakValue} onChange={this.onZnak}/>
+            <input 
+                type="text" 
+                value={this.state.num2} 
+                onChange={this.inputHandler}
+                name="num2"
+                />
             <button onClick={this.onSolve}>=</button>
             <span>Result:{this.state.result}</span>
         </div>
